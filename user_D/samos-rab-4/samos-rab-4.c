@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 
 
 int main()
@@ -13,8 +14,8 @@ int main()
 	long int sum = 0; 
 	long int old_sum = 0; 
 
-	bool is_power_trouble = false;
-	bool is_sum_trouble = false;
+	int is_power_trouble = 0;
+	int is_sum_trouble = 0;
 
 	while (n) //Увеличиваем n пока не заметим переполнение
 	{
@@ -27,19 +28,20 @@ int main()
 
 			for (int j = 0; j < n; j++) //Возведение в степень n числа i
 			{	
-				is_power_trouble = __builtin_mul_overflow(a, i, &a);
+				if (a >= LONG_MAX / i) is_power_trouble = 1; //Проврека на переполнение при возведение в степень
 
+				a *= i
 			}
 			printf("\t%d^%d = %ld  ", i, n, a);
 
-			is_sum_trouble =  __builtin_add_overflow(sum, a, &sum);
+			if (sum >= LONG_MAX - a) is_sum_trouble = 1; // Проверка на переполнение суммы
 			printf("sum = <%ld>, is_sum_trouble = %d, is_power_trouble = %d\n", sum, is_sum_trouble, is_power_trouble);	
-			if (is_sum_trouble || is_power_trouble) break;	
+			if (is_sum_trouble || is_power_trouble) break;	//ЗАвершаем суммирование если случилось переполнение
 		}
 
 		printf("SUM(long int sum = <%ld>) at n = <%d>\n", sum, n);
 
-		if (is_power_trouble || is_sum_trouble)
+		if (is_power_trouble || is_sum_trouble) 
 		{
 			printf("OVERFLOW\n");
 			break;
