@@ -30,13 +30,15 @@ int main()
 			{	
 				if (a >= LONG_MAX / i) is_power_trouble = 1; //Проврека на переполнение при возведение в степень
 
-				a *= i
+				a *= i;
 			}
 			printf("\t%d^%d = %ld  ", i, n, a);
 
 			if (sum >= LONG_MAX - a) is_sum_trouble = 1; // Проверка на переполнение суммы
 			printf("sum = <%ld>, is_sum_trouble = %d, is_power_trouble = %d\n", sum, is_sum_trouble, is_power_trouble);	
 			if (is_sum_trouble || is_power_trouble) break;	//ЗАвершаем суммирование если случилось переполнение
+			
+			sum += a;
 		}
 
 		printf("SUM(long int sum = <%ld>) at n = <%d>\n", sum, n);
@@ -56,7 +58,7 @@ int main()
 	printf("%ld\n", old_sum);
 	printf("%d\n", n-1);
 	if (is_power_trouble) putchar('*');
-	if (is_sum_trouble) putchar('+');
+	if (is_sum_trouble && !is_power_trouble) putchar('+');
 
 
 
