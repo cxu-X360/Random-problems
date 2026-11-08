@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+int main()
+{
+    float a, b, c;
+    double x = 0.0, x_1 = 0.0, x_2 = 0.0, D = 0.0;
+
+    scanf("%f", a);
+    scanf("%f", b);
+    scanf("%f", c);
+
+    D = b * b - 4 * a * c;
+
+    if (D > 0)
+    {
+        x_1 = ((-1) * b + sqrt(D)) / (2 * a);
+        x_2 = ((-1) * b - sqrt(D)) / (2 * a);
+        printf("корни:\n%f %f", x_1, x_2);
+    }
+
+    else if (D = 0)
+    {
+        x = ((-1) * b) / (2 * a);
+        printf("корень:\n%f", x);
+    }
+    else
+        printf("нет корней)");
+    return 0;
+}
